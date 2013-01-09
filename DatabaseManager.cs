@@ -20,8 +20,12 @@ using System.Data.SqlClient;
 
 namespace ZORAN.DB.IP.Importer
 {
-    public class InsertIntoDatabase
+    public class DatabaseManager
     {
+        private static string STAGING_TABLE_NAME = "dbo.dbip_city_stage";
+        private static string LIVE_TABLE_NAME = "dbo.dbip_city";
+
+
         /// <summary>
         /// Returns a DataTable representing the entry in the DB-IP database.
         /// </summary>
@@ -44,40 +48,49 @@ namespace ZORAN.DB.IP.Importer
         /// <param name="connString"></param>
         /// <param name="dt"></param>
         public static void BulkInsert(string connString, DataTable dt)
-        {
-            string tableName = "dbo.dbip_city_stage";
+        {            
             using (var cn = new SqlConnection(connString))
             {
                 cn.Open();
 
-                TruncateTable(cn, tableName);
+                TruncateTable(cn, STAGING_TABLE_NAME);
 
                 using (var bulkCopy = new SqlBulkCopy(cn))
                 {
-                    bulkCopy.DestinationTableName = tableName;
+                    bulkCopy.DestinationTableName = STAGING_TABLE_NAME;
                     bulkCopy.BulkCopyTimeout = 0;
                     bulkCopy.WriteToServer(dt);
                 }
 
                 MoveDataFromStageToLive(cn);
-                TruncateTable(cn, tableName);
+                TruncateTable(cn, STAGING_TABLE_NAME);
                 cn.Close();
             }
         }
 
-        private static void TruncateTable(SqlConnection connection, string tablename)
+        /// <summary>
+        /// Truncates the specified table provided as the tableName
+        /// </summary>
+        /// <param name="connection">an open connection</param>
+        /// <param name="tableName"></param>
+        private static void TruncateTable(SqlConnection connection, string tableName)
         {
             SqlCommand comm = connection.CreateCommand();
-            comm.CommandText = "TRUNCATE TABLE " + tablename;
+            comm.CommandText = "TRUNCATE TABLE " + tableName;
             comm.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Moves the data from the "stagint" to the "live" table
+        /// </summary>
+        /// <param name="connection"></param>
         private static void MoveDataFromStageToLive(SqlConnection connection)
         {
             using (SqlTransaction tx = connection.BeginTransaction())
             {
                 var command = connection.CreateCommand();
-                command.CommandText = "truncate table dbip_city \n insert into dbip_city select * From dbip_city_stage";
+                command.CommandText = "TRUNCATE TABLE " + LIVE_TABLE_NAME + " \n INSERT INTO " + LIVE_TABLE_NAME +
+                                      " SELECT * FROM " + STAGING_TABLE_NAME;
                 command.CommandTimeout = 0;
                 command.Transaction = tx;
                 command.ExecuteNonQuery();

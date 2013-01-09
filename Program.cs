@@ -15,6 +15,7 @@
    limitations under the License.
 */
 
+using System;
 using System.Configuration;
 using System.Globalization;
 using System.IO;
@@ -38,8 +39,8 @@ namespace ZORAN.DB.IP.Importer
             var csv = new CsvReader(new StreamReader(DbIpCityFile), c);
 
             var items = csv.GetRecords<DbIpCity>();
-            var dt = InsertIntoDatabase.GetDataTable();
-
+            var dt = DatabaseManager.GetDataTable();
+            
             foreach (var item in items)
             {                
                 var row = dt.NewRow();
@@ -52,7 +53,7 @@ namespace ZORAN.DB.IP.Importer
                 dt.Rows.Add(row);
             }
 
-            InsertIntoDatabase.BulkInsert(ConnString, dt);
+            DatabaseManager.BulkInsert(ConnString, dt);
         }
     }
 }
