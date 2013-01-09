@@ -1,0 +1,4 @@
+# git ignore file
+bin
+obj
+*.suo
