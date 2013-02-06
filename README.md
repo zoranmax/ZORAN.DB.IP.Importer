@@ -1,12 +1,14 @@
 ZORAN.DB.IP.Importer
 ====================
 
-DB-IP.com is a free location database data import tool for Microsoft SQL Server.
+ZORAN.DB.IP.Importer is a tool that imports into Microsoft SQL Server the freely available geolocation
+database offered by www.db-ip.com. 
 
 Documentation 
 ====================
 
-For more information please check the Wiki at: https://github.com/zoranmax/ZORAN.DB.IP.Importer/wiki
+For more information please check the documentation https://github.com/zoranmax/ZORAN.DB.IP.Importer/wiki
+or here http://www.agile-code.com/blog/import-db-ip-com-database-data-to-microsoft-sql-server-with-zoran-db-ip-importer-tool/
 
 Licence 
 ====================
