@@ -15,28 +15,20 @@
    limitations under the License.
 */
 
-using CsvHelper.Configuration;
-
 namespace ZORAN.DB.IP.Importer
 {
     public class DbIpCity
     {
-        [CsvField(Index = 0)]
         public string IpStart { get; set; }
 
-        [CsvField(Index = 1)]
         public string IpEnd { get; set; }
-         
-        [CsvField(Index = 2)]
+
         public string Country { get; set; }
 
-        [CsvField(Index = 3)]
         public string Region { get; set; }
-
-        [CsvField(Index = 4)]
+        
         public string City { get; set; }
 
-        [CsvField(Ignore=true)]
         public int Type
         {
             get

@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2012 Zoran Maksimovic (zoran.maksimovich@gmail.com 
+   Copyright 2018 Zoran Maksimovic (zoran.maksimovich@gmail.com 
    http://www.agile-code.com)
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +15,10 @@
    limitations under the License.
 */
 
-using System;
 using System.Configuration;
 using System.Globalization;
 using System.IO;
 using CsvHelper;
-using CsvHelper.Configuration;
 
 namespace ZORAN.DB.IP.Importer
 {
@@ -31,13 +29,8 @@ namespace ZORAN.DB.IP.Importer
 
         private static void Main(string[] args)
         {
-            var c = new CsvConfiguration()
-                {
-                    HasHeaderRecord = false
-                };
-
-            var csv = new CsvReader(new StreamReader(DbIpCityFile), c);
-
+            var csv = new CsvReader(new StreamReader(DbIpCityFile), true);
+            csv.Configuration.HasHeaderRecord = false;
             var items = csv.GetRecords<DbIpCity>();
             var dt = DatabaseManager.GetDataTable();
             

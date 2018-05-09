@@ -24,8 +24,7 @@ namespace ZORAN.DB.IP.Importer
     {
         private static string STAGING_TABLE_NAME = "dbo.dbip_city_stage";
         private static string LIVE_TABLE_NAME = "dbo.dbip_city";
-
-
+        
         /// <summary>
         /// Returns a DataTable representing the entry in the DB-IP database.
         /// </summary>
