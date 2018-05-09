@@ -64,8 +64,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="SqlScripts\dbip_city_stage.sql" />
-    <Content Include="SqlScripts\dbip_city.sql" />
+    <Content Include="SqlScripts\dbip_city_stage.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlScripts\dbip_city.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
