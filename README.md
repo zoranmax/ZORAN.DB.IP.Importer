@@ -17,4 +17,6 @@ http://www.apache.org/licenses/LICENSE-2.0
 Downloads
 ====================
 
-Download the first version of the compiled application <a href="http://bit.ly/Wzjifg">ZORAN.DB-IP-Importer_v1.0.0.zip</a>
+Download the compiled application 
+- <a href="http://bit.ly/Wzjifg">ZORAN.DB-IP-Importer_v1.0.0.zip</a>
+- <a href="https://www.dropbox.com/s/8bnswxx13qt2w3r/ZORAN.DB-IP.Importer_v1.1.0.0.zip">ZORAN.DB-IP-Importer_v1.1.0.zip</a>
